@@ -1,0 +1,86 @@
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 30291014496978ce412f35b79942893bad7de1222aea2103731af9e479d7c960
+
+name:           euler
+version:        0.1.0.0
+description:    Please see the README on Github at <https://github.com/rod-lin/euler#readme>
+homepage:       https://github.com/rod-lin/euler#readme
+bug-reports:    https://github.com/rod-lin/euler/issues
+author:         Rod Lin
+maintainer:     rod.yeti@outlook.com
+copyright:      2018 Rod
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    ChangeLog.md
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/rod-lin/euler
+
+library
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , permutation
+    , random
+  exposed-modules:
+      Euler.P1
+      Euler.P10
+      Euler.P11
+      Euler.P12
+      Euler.P13
+      Euler.P14
+      Euler.P15
+      Euler.P16
+      Euler.P17
+      Euler.P18
+      Euler.P19
+      Euler.P2
+      Euler.P20
+      Euler.P21
+      Euler.P22
+      Euler.P23
+      Euler.P24
+      Euler.P25
+      Euler.P26
+      Euler.P27
+      Euler.P28
+      Euler.P29
+      Euler.P3
+      Euler.P30
+      Euler.P31
+      Euler.P4
+      Euler.P5
+      Euler.P6
+      Euler.P7
+      Euler.P8
+      Euler.P9
+      Euler.Util
+  other-modules:
+      Paths_euler
+  default-language: Haskell2010
+
+executable euler-exe
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , containers
+    , euler
+    , permutation
+    , random
+  other-modules:
+      Paths_euler
+  default-language: Haskell2010
