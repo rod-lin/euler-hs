@@ -2,6 +2,7 @@ module Euler.Util where
 
 import Data.Bits
 import Data.Char
+import Data.List
 
 import System.Random
 
@@ -159,3 +160,58 @@ unique [] = []
 unique (x:xs)
     | x `elem` xs  = unique xs
     | otherwise = x : unique xs
+
+rotateList :: [a] -> [a]
+rotateList lst = last lst : init lst
+
+rotationsOfList :: [a] -> [[a]]
+rotationsOfList lst =
+    take (length lst) (iterate rotateList lst)
+
+bits :: (Bits t, Integral t) => t -> [t]
+bits 0 = []
+bits n
+    | n < 0 = error "bits only support non-zero number"
+    | otherwise = bits (n `shiftR` 1) ++ [ n .&. 1 ]
+
+isPalindrome :: Eq t => [t] -> Bool
+isPalindrome [] = True
+isPalindrome [_] = True
+isPalindrome lst =
+    head lst == last lst && isPalindrome (init (tail lst))
+
+-- t = n(n + 1)/2
+-- n^2 + n - 2t = 0
+-- delta = 1 + 8t
+-- n = -1 +/- (isqrt (1 + 8t)) / 2a
+isTriangleNum :: Integral t => t -> Bool
+isTriangleNum t = solveQuadEqInt 1 1 (-2 * t) /= Nothing
+
+fillHead :: a -> Int -> [a] -> [a]
+fillHead e n l =
+    replicate (n - length l) e ++ l
+
+solveQuadEqInt :: Integral t => t -> t -> t -> Maybe (t, t)
+solveQuadEqInt a b c =
+    if delta >= 0 && a * (s1 ^ 2) + b * s1 + c == 0 then
+        Just (s1, s2)
+    else
+        Nothing
+
+    where delta = b ^ 2 - 4 * a * c
+          s1 = (-b + isqrt delta) `div` (2 * a)
+          s2 = (-b - isqrt delta) `div` (2 * a)
+
+allEq :: Eq a => [a] -> Bool
+allEq [] = True
+allEq (a:as) = all (== a) as
+
+-- take n SORTED(in ascending order) lists
+-- drop each list until the same head is found
+-- the order may be changed
+commonHead :: Ord a => [[a]] -> [[a]]
+commonHead lists =
+    first (allEq . map head) $
+    flip iterate lists $ \lists ->
+        let (i, max:_) = maximumBy (\(_, a:_) (_, b:_) -> compare a b) (zip [0..] lists)
+        in map (dropWhile (< max)) lists

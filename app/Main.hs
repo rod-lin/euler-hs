@@ -2,7 +2,7 @@ module Main where
 
 import Debug.Trace
 
-import Euler.P30
+import Euler.P44
 
 main :: IO ()
 main = traceShowM solve
