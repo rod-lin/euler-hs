@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6e683e1abc3905b00f9b0c4614245f6c97061be1d9cde9f4ec1013e911fa7b98
+-- hash: 297e57f52551246e17603c5b56cd330313e9a4f1bd559b85bff4c83c81fa75bb
 
 name:           euler
 version:        0.1.0.0
@@ -74,7 +74,12 @@ library
       Euler.P43
       Euler.P44
       Euler.P45
+      Euler.P46
+      Euler.P47
+      Euler.P48
+      Euler.P49
       Euler.P5
+      Euler.P50
       Euler.P6
       Euler.P7
       Euler.P8

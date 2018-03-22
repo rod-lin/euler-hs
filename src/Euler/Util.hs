@@ -215,3 +215,23 @@ commonHead lists =
     flip iterate lists $ \lists ->
         let (i, max:_) = maximumBy (\(_, a:_) (_, b:_) -> compare a b) (zip [0..] lists)
         in map (dropWhile (< max)) lists
+
+isSquare :: Integral t => t -> Bool
+isSquare n = isqrt n ^ 2 == n
+
+primeFactor :: (Bits t, Integral t, Show t) => t -> [t]
+primeFactor n =
+    map snd $
+    takeWhile ((/= 0) . snd) $ tail $
+    flip iterate (n, 1) $ \(n, _) ->
+        if isPrime n then
+            (1, n)
+        else if n == 1 then
+            (n, 0)
+        else
+            let f = first (`divides` n) primes
+            in (n `div` f, f)
+
+fst3 (a, _, _) = a
+snd3 (_, b, _) = b
+trd3 (_, _, c) = c
